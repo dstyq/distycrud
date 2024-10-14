@@ -332,12 +332,7 @@ return [
         'url' => 'purchase/purchase-orders',
         'icon' => 'fas fa-shopping-cart', // Ikon tetap
     ],
-    ['header' => 'Settings'],
-    [
-        'text' => 'System Settings',
-        'url' => 'admin/settings',
-        'icon' => 'fas fa-cog', // Ganti menjadi ikon pengaturan
-    ],
+
 ],
 'layout_fixed_sidebar' => true,
 'layout_fixed_navbar' => true,
