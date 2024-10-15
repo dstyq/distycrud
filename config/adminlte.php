@@ -304,7 +304,7 @@ return [
     [
         'text' => 'Dashboard',
         'url' => 'dashboard',
-        'icon' => 'fas fa-tachometer-alt', // Tambahkan ikon yang menarik
+        'icon' => 'fas fa-tachometer-alt', 
     ],
     [
         'text' => 'Master Data',
@@ -313,24 +313,29 @@ return [
             [
                 'text' => 'User',
                 'url' => 'master/user',
-                'icon' => 'fas fa-user-friends', // Ikon baru
+                'icon' => 'fas fa-user-friends', 
             ],
             [
                 'text' => 'Supplier',
                 'url' => 'master/supplier',
-                'icon' => 'fas fa-truck', // Ikon tetap
+                'icon' => 'fas fa-truck', 
             ],
             [
                 'text' => 'Material',
                 'url' => 'master/material',
-                'icon' => 'fas fa-box', // Ikon tetap
+                'icon' => 'fas fa-box', 
+            ],
+            [
+                'text' => 'Product',
+                'url' => 'master/product',
+                'icon' => 'fas fa-coffee', //nanti edit lag!!!
             ],
         ],
     ],
     [
         'text' => 'Purchase Orders',
         'url' => 'purchase/purchase-orders',
-        'icon' => 'fas fa-shopping-cart', // Ikon tetap
+        'icon' => 'fas fa-shopping-cart',
     ],
 
 ],
