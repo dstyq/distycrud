@@ -327,8 +327,8 @@ return [
             ],
             [
                 'text' => 'Product',
-                'url' => 'master/product',
-                'icon' => 'fas fa-coffee', //nanti edit lag!!!
+                'url' => 'master/products',
+                'icon' => 'fas fa-coffee', 
             ],
         ],
     ],

@@ -18,6 +18,7 @@ class CreatePurchaseOrdersTable extends Migration
             $table->text('deskripsi')->nullable();
             $table->timestamps();
 
+            // Definisikan foreign key
             $table->foreign('material_id')->references('id')->on('materials')->onDelete('cascade');
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
         });

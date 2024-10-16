@@ -13,6 +13,7 @@
             ['title' => 'Users', 'count' => $userCount, 'color' => 'info', 'icon' => 'users', 'route' => 'master.user.index'],
             ['title' => 'Suppliers', 'count' => $supplierCount, 'color' => 'success', 'icon' => 'truck', 'route' => 'master.supplier.index'],
             ['title' => 'Materials', 'count' => $materialCount, 'color' => 'warning', 'icon' => 'box', 'route' => 'master.material.index'],
+            ['title' => 'Products', 'count' => $productCount, 'color' => 'primary', 'icon' => 'gift', 'route' => 'master.products.index'], 
             ['title' => 'Purchase Orders', 'count' => $purchaseOrderCount, 'color' => 'danger', 'icon' => 'file-invoice-dollar', 'route' => 'purchase.purchase-orders.index'],
         ] as $stat)
         <div class="col-lg-3">
@@ -41,6 +42,7 @@
                         <a href="{{ route('master.user.create') }}" class="btn btn-primary">Add User</a>
                         <a href="{{ route('master.supplier.create') }}" class="btn btn-primary">Add Supplier</a>
                         <a href="{{ route('master.material.create') }}" class="btn btn-primary">Add Material</a>
+                        <a href="{{ route('master.products.create') }}" class="btn btn-primary">Add Product</a>
                         <a href="{{ route('purchase.purchase-orders.create') }}" class="btn btn-primary">Create Purchase Order</a>
                     </div>
                 </div>
@@ -57,6 +59,7 @@
                 <option value="users">Users</option>
                 <option value="suppliers">Suppliers</option>
                 <option value="materials">Materials</option>
+                <option value="products">Products</option> 
                 <option value="purchase_orders">Purchase Orders</option>
             </select>
         </div>
@@ -89,6 +92,12 @@
                 label: 'Purchase Orders',
                 data: [2, 3, 20, 5, 1, 4],
                 borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+                fill: false,
+            }, {
+                label: 'Products', 
+                data: [3, 7, 10, 8, 5, 6],
+                borderColor: 'rgba(255, 206, 86, 1)',
                 borderWidth: 1,
                 fill: false,
             }]

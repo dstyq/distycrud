@@ -6,6 +6,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
 
 // Dashboard Route
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
@@ -35,6 +36,14 @@ Route::prefix('master')->group(function () {
     Route::get('material/{id}/edit', [MaterialController::class, 'edit'])->name('master.material.edit');
     Route::put('material', [MaterialController::class, 'update'])->name('master.material.update');
     Route::delete('material/{id}', [MaterialController::class, 'destroy'])->name('master.material.destroy');
+
+    // Product Routes
+    Route::get('products', [ProductController::class, 'index'])->name('master.products.index');
+    Route::get('products/create', [ProductController::class, 'create'])->name('master.products.create');
+    Route::post('products', [ProductController::class, 'store'])->name('master.products.store');
+    Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('master.products.edit');
+    Route::put('products/{id}', [ProductController::class, 'update'])->name('master.products.update'); 
+    Route::delete('products/{id}', [ProductController::class, 'destroy'])->name('master.products.destroy');
 });
 
 // Purchase Order Routes

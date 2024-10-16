@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Supplier;
 use App\Models\Material;
 use App\Models\PurchaseOrder;
+use App\Models\Product;
 
 class DashboardController extends Controller
 {
@@ -14,8 +15,9 @@ class DashboardController extends Controller
         $userCount = User::count();
         $supplierCount = Supplier::count();
         $materialCount = Material::count();
+        $productCount = Product::count(); 
         $purchaseOrderCount = PurchaseOrder::count();
 
-        return view('dashboard.index', compact('userCount', 'supplierCount', 'materialCount', 'purchaseOrderCount'));
+        return view('dashboard.index', compact('userCount', 'supplierCount', 'materialCount', 'productCount', 'purchaseOrderCount')); 
     }
 }
