@@ -18,13 +18,11 @@ class PurchaseOrder extends Model
         'deskripsi'
     ];
 
-    // Hubungkan ke model Material
     public function material()
     {
         return $this->belongsTo(Material::class);
     }
 
-    // Hubungkan ke model Supplier
     public function supplier()
     {
         return $this->belongsTo(Supplier::class);

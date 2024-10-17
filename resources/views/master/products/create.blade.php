@@ -5,8 +5,9 @@
     <h1>Create Product</h1>
 </div>
 <div class="content">
-    <form action="{{ route('master.products.store') }}" method="POST">
+    <form action="{{ route('master.products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
+
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required>
@@ -17,7 +18,7 @@
 
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control @error('description') is-invalid @enderror" name="description" required>{{ old('description') }}</textarea>
+            <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="3" required>{{ old('description') }}</textarea>
             @error('description')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -43,6 +44,22 @@
             <label for="category">Category</label>
             <input type="text" class="form-control @error('category') is-invalid @enderror" name="category" value="{{ old('category') }}" required>
             @error('category')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="stock">Stock</label>
+            <input type="number" class="form-control @error('stock') is-invalid @enderror" name="stock" value="{{ old('stock') }}" required>
+            @error('stock')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="images">Product Image</label>
+            <input type="file" class="form-control @error('images') is-invalid @enderror" name="images[]" multiple>
+            @error('images')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>

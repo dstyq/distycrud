@@ -3,21 +3,19 @@
 @section('content')
 <div class="content-header">
     <h1>Users</h1>
-    <a href="{{ route('master.user.create') }}" class="btn btn-primary">Create User</a>
+    <a href="{{ route('master.user.create') }}" class="btn btn-primary">Add User</a>
 </div>
 <div class="content">
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <!-- Search Bar -->
     <div class="mb-3">
         <form action="{{ route('master.user.index') }}" method="GET">
             <input type="text" name="search" class="form-control" placeholder="Search by Name or Email" value="{{ request()->get('search') }}">
         </form>
     </div>
 
-    <!-- Users Table -->
     <table class="table table-bordered table-striped">
         <thead>
             <tr>

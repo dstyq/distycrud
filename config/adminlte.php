@@ -328,7 +328,7 @@ return [
             [
                 'text' => 'Product',
                 'url' => 'master/products',
-                'icon' => 'fas fa-coffee', 
+                'icon' => 'fas fa-gift', 
             ],
         ],
     ],

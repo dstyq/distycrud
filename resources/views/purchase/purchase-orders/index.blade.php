@@ -10,14 +10,12 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <!-- Search Bar -->
     <div class="mb-3">
         <form action="{{ route('purchase.purchase-orders.index') }}" method="GET">
             <input type="text" name="search" class="form-control" placeholder="Search by Purchase Name or Supplier" value="{{ request()->get('search') }}">
         </form>
     </div>
 
-    <!-- Purchase Orders Table -->
     <table class="table table-bordered table-striped">
         <thead>
             <tr>

@@ -5,24 +5,20 @@
     <h1>Dashboard</h1>
 </div>
 <div class="content">
-    <p>Selamat datang di dashboard Anda. Berikut adalah ringkasan data:</p>
+    <p>Selamat datang di dashboard :D</p>
     
-    <!-- Stats Cards -->
     <div class="row">
         @foreach ([
-            ['title' => 'Users', 'count' => $userCount, 'color' => 'info', 'icon' => 'users', 'route' => 'master.user.index'],
-            ['title' => 'Suppliers', 'count' => $supplierCount, 'color' => 'success', 'icon' => 'truck', 'route' => 'master.supplier.index'],
-            ['title' => 'Materials', 'count' => $materialCount, 'color' => 'warning', 'icon' => 'box', 'route' => 'master.material.index'],
-            ['title' => 'Products', 'count' => $productCount, 'color' => 'primary', 'icon' => 'gift', 'route' => 'master.products.index'], 
-            ['title' => 'Purchase Orders', 'count' => $purchaseOrderCount, 'color' => 'danger', 'icon' => 'file-invoice-dollar', 'route' => 'purchase.purchase-orders.index'],
+            ['title' => 'Users', 'color' => 'info', 'icon' => 'users', 'route' => 'master.user.index'],
+            ['title' => 'Suppliers', 'color' => 'success', 'icon' => 'truck', 'route' => 'master.supplier.index'],
+            ['title' => 'Materials', 'color' => 'warning', 'icon' => 'box', 'route' => 'master.material.index'],
         ] as $stat)
-        <div class="col-lg-3">
-            <div class="card bg-{{ $stat['color'] }} text-white">
-                <div class="card-header">
-                    <h4><i class="fas fa-{{ $stat['icon'] }}"></i> {{ $stat['title'] }} </h4>
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card bg-{{ $stat['color'] }} text-white shadow-lg">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0"><i class="fas fa-{{ $stat['icon'] }}"></i> {{ $stat['title'] }}</h4>
                 </div>
-                <div class="card-body">
-                    <h1 class="display-4">{{ $stat['count'] }}</h1>
+                <div class="card-body text-center">
                     <a href="{{ route($stat['route']) }}" class="btn btn-light btn-sm">Lihat Detail</a>
                 </div>
             </div>
@@ -30,85 +26,45 @@
         @endforeach
     </div>
 
-    <!-- Quick Actions -->
+    <div class="row mb-3">
+        @foreach ([
+            ['title' => 'Products', 'color' => 'primary', 'icon' => 'gift', 'route' => 'master.products.index'], 
+            ['title' => 'Purchase Orders', 'color' => 'danger', 'icon' => 'file-invoice-dollar', 'route' => 'purchase.purchase-orders.index'],
+        ] as $stat)
+        <div class="col-lg-6 mb-4">
+            <div class="card bg-{{ $stat['color'] }} text-white shadow-lg">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0"><i class="fas fa-{{ $stat['icon'] }}"></i> {{ $stat['title'] }}</h4>
+                </div>
+                <div class="card-body text-center">
+                    <a href="{{ route($stat['route']) }}" class="btn btn-light btn-sm">Lihat Detail</a>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+
     <div class="row mb-3">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4><i class="fas fa-tools"></i> Quick Actions </h4>
+                    <h4><i class="fas fa-tools"></i> Quick Actions</h4>
                 </div>
                 <div class="card-body">
                     <div class="btn-group">
-                        <a href="{{ route('master.user.create') }}" class="btn btn-primary">Add User</a>
-                        <a href="{{ route('master.supplier.create') }}" class="btn btn-primary">Add Supplier</a>
-                        <a href="{{ route('master.material.create') }}" class="btn btn-primary">Add Material</a>
-                        <a href="{{ route('master.products.create') }}" class="btn btn-primary">Add Product</a>
-                        <a href="{{ route('purchase.purchase-orders.create') }}" class="btn btn-primary">Create Purchase Order</a>
+                        @foreach ([
+                            ['route' => 'master.user.create', 'text' => 'Add User'],
+                            ['route' => 'master.supplier.create', 'text' => 'Add Supplier'],
+                            ['route' => 'master.material.create', 'text' => 'Add Material'],
+                            ['route' => 'master.products.create', 'text' => 'Add Product'],
+                            ['route' => 'purchase.purchase-orders.create', 'text' => 'Create Purchase Order'],
+                        ] as $action)
+                            <a href="{{ route($action['route']) }}" class="btn btn-primary">{{ $action['text'] }}</a>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Search Functionality -->
-    <div class="row mb-3">
-        <div class="col-lg-12">
-            <input type="text" class="form-control" placeholder="Search...">
-            <select class="form-control mt-2">
-                <option value="">All Categories</option>
-                <option value="users">Users</option>
-                <option value="suppliers">Suppliers</option>
-                <option value="materials">Materials</option>
-                <option value="products">Products</option> 
-                <option value="purchase_orders">Purchase Orders</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- Chart Section -->
-    <div class="row">
-        <div class="col-lg-12">
-            <canvas id="monthlyOverviewChart"></canvas>
-        </div>
-    </div>
 </div>
-@endsection
-
-@section('js')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    const ctx = document.getElementById('monthlyOverviewChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-            datasets: [{
-                label: 'Users',
-                data: [12, 19, 3, 5, 2, 3],
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1,
-                fill: false,
-            }, {
-                label: 'Purchase Orders',
-                data: [2, 3, 20, 5, 1, 4],
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1,
-                fill: false,
-            }, {
-                label: 'Products', 
-                data: [3, 7, 10, 8, 5, 6],
-                borderColor: 'rgba(255, 206, 86, 1)',
-                borderWidth: 1,
-                fill: false,
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>
 @endsection

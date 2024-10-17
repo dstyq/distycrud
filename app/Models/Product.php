@@ -12,13 +12,31 @@ class Product extends Model
     protected $fillable = [
         'title',
         'description',
-        'price',
-        'brand',
         'category',
-        'image_url',
+        'price',
+        'rating',
+        'stock',
+        'brand',
+        'sku',
+        'images',
+        'warrantyInformation',
+        'shippingInformation',
+        'availabilityStatus',
+    ];
+    
+    protected $casts = [
+        'images' => 'array', 
     ];
 
-    protected $casts = [
-        'price' => 'decimal:2', 
-    ]; 
+    public function setImagesAttribute($value)
+    {
+        $this->attributes['images'] = is_array($value) ? json_encode($value) : json_encode([]);
+    }
+
+    public function getFirstImageAttribute()
+    {
+        $images = $this->images;
+        return is_array($images) && count($images) > 0 ? $images[0] : null;
+    }
+
 }

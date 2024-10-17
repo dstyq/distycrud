@@ -10,19 +10,25 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $response = Http::withOptions(['verify'=>false])->get('https://dummyjson.com/products');
-        $products = json_decode($response->body(), true)['products'];
+        $response = Http::withOptions(['verify' => false])->get('https://dummyjson.com/products');
+        $productsData = json_decode($response->body(), true)['products'];
 
-        foreach ($products as $product) {
+        foreach ($productsData as $product) {
             Product::updateOrCreate(
                 ['id' => $product['id']],
                 [
                     'title' => $product['title'] ?? 'Unnamed Product',
                     'description' => $product['description'] ?? '',
-                    'price' => $product['price'] ?? 0,
-                    'brand' => $product['brand'] ?? 'Unknown Brand',
                     'category' => $product['category'] ?? 'Uncategorized',
-                    'image_url' => $product['image'] ?? null,
+                    'price' => $product['price'] ?? 0,
+                    'rating' => $product['rating'] ?? 0,
+                    'stock' => $product['stock'] ?? 0,
+                    'brand' => $product['brand'] ?? 'Unknown Brand',
+                    'sku' => $product['sku'] ?? null,
+                    'images' => $product['images'] ?? [],
+                    'warrantyInformation' => $product['warrantyInformation'] ?? null,
+                    'shippingInformation' => $product['shippingInformation'] ?? null,
+                    'availabilityStatus' => $product['availabilityStatus'] ?? null,
                 ]
             );
         }
@@ -35,7 +41,7 @@ class ProductController extends Controller
                   ->orWhere('brand', 'like', '%' . $search . '%');
         }
 
-        $products = $query->get(); 
+        $products = $query->paginate(10); 
 
         return view('master.products.index', compact('products')); 
     }
@@ -49,14 +55,20 @@ class ProductController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
             'price' => 'required|numeric',
-            'brand' => 'nullable|string|max:255',
-            'category' => 'nullable|string|max:255',
-            'image_url' => 'nullable|url',
+            'stock' => 'required|integer',
+            'images' => 'nullable|array',
+            'warrantyInformation' => 'nullable|string',
+            'shippingInformation' => 'nullable|string',
+            'availabilityStatus' => 'nullable|string',
         ]);
 
-        Product::create($request->only(['title', 'description', 'price', 'brand', 'category', 'image_url']));
+        Product::create($request->only([
+            'title', 'description', 'category', 'price', 
+            'rating', 'stock', 'brand', 'sku', 
+            'images', 'warrantyInformation', 
+            'shippingInformation', 'availabilityStatus'
+        ]));
 
         return redirect()->route('master.products.index')->with('success', 'Product created successfully.');
     }
@@ -70,14 +82,20 @@ class ProductController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
             'price' => 'required|numeric',
-            'brand' => 'nullable|string|max:255',
-            'category' => 'nullable|string|max:255',
-            'image_url' => 'nullable|url',
+            'stock' => 'required|integer',
+            'images' => 'nullable|array', 
+            'warrantyInformation' => 'nullable|string',
+            'shippingInformation' => 'nullable|string',
+            'availabilityStatus' => 'nullable|string',
         ]);
 
-        $product->update($request->only(['title', 'description', 'price', 'brand', 'category', 'image_url']));
+        $product->update($request->only([
+            'title', 'description', 'category', 'price', 
+            'rating', 'stock', 'brand', 'sku', 
+            'images', 'warrantyInformation', 
+            'shippingInformation', 'availabilityStatus'
+        ]));
 
         return redirect()->route('master.products.index')->with('success', 'Product updated successfully.');
     }

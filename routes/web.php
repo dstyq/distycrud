@@ -16,10 +16,10 @@ Route::prefix('master')->group(function () {
     // User Routes
     Route::get('user', [UserController::class, 'index'])->name('master.user.index');
     Route::get('user/create', [UserController::class, 'create'])->name('master.user.create');
-    Route::post('user', [UserController::class, 'store'])->name('master.user.store'); // Menyimpan pengguna baru
+    Route::post('user', [UserController::class, 'store'])->name('master.user.store'); 
     Route::get('user/{id}/edit', [UserController::class, 'edit'])->name('master.user.edit');
-    Route::put('user/{id}', [UserController::class, 'update'])->name('master.user.update'); // Memperbarui pengguna
-    Route::delete('user/{id}', [UserController::class, 'destroy'])->name('master.user.destroy'); // Menghapus pengguna
+    Route::put('user/{id}', [UserController::class, 'update'])->name('master.user.update'); 
+    Route::delete('user/{id}', [UserController::class, 'destroy'])->name('master.user.destroy'); 
 
     // Supplier Routes
     Route::get('supplier', [SupplierController::class, 'index'])->name('master.supplier.index');
@@ -42,7 +42,7 @@ Route::prefix('master')->group(function () {
     Route::get('products/create', [ProductController::class, 'create'])->name('master.products.create');
     Route::post('products', [ProductController::class, 'store'])->name('master.products.store');
     Route::get('products/{id}/edit', [ProductController::class, 'edit'])->name('master.products.edit');
-    Route::put('products/{id}', [ProductController::class, 'update'])->name('master.products.update'); 
+    Route::put('products/{id}', [ProductController::class, 'update'])->name('master.products.update');
     Route::delete('products/{id}', [ProductController::class, 'destroy'])->name('master.products.destroy');
 });
 
@@ -55,4 +55,3 @@ Route::prefix('purchase')->group(function () {
     Route::put('purchase-orders/{id}', [PurchaseOrderController::class, 'update'])->name('purchase.purchase-orders.update');
     Route::delete('purchase-orders/{id}', [PurchaseOrderController::class, 'destroy'])->name('purchase.purchase-orders.destroy');
 });
-

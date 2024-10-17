@@ -10,14 +10,12 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <!-- Search Bar -->
     <div class="mb-3">
         <form action="{{ route('master.supplier.index') }}" method="GET">
             <input type="text" name="search" class="form-control" placeholder="Search by Name or Email" value="{{ request()->get('search') }}">
         </form>
     </div>
 
-    <!-- Suppliers Table -->
     <table class="table table-bordered table-striped">
         <thead>
             <tr>

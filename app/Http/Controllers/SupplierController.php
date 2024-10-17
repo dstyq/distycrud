@@ -20,7 +20,6 @@ class SupplierController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
             'nama' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
@@ -28,7 +27,6 @@ class SupplierController extends Controller
             'nomor_handphone' => 'required|string|max:15',
         ]);
 
-        // Buat supplier baru
         Supplier::create($request->all());
         return redirect()->route('master.supplier.index')->with('success', 'Supplier created successfully.');
     }
@@ -40,7 +38,6 @@ class SupplierController extends Controller
 
     public function update(Request $request, Supplier $supplier)
     {
-        // Validasi input
         $request->validate([
             'nama' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
@@ -48,14 +45,12 @@ class SupplierController extends Controller
             'nomor_handphone' => 'required|string|max:15',
         ]);
 
-        // Update supplier
         $supplier->update($request->all());
         return redirect()->route('master.supplier.index')->with('success', 'Supplier updated successfully.');
     }
 
     public function destroy(Supplier $supplier)
     {
-        // Hapus supplier
         $supplier->delete();
         return redirect()->route('master.supplier.index')->with('success', 'Supplier deleted successfully.');
     }
